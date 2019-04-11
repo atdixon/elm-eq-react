@@ -1,0 +1,34 @@
+(1) start w/ simplest possible view functions in elm
+    ... or even foo function and bring to REPL
+    ... then show returning of DOM structure...
+(2) then introduce events
+
+const view = props =>
+	<h1 className="title"
+		onClick="() => changeColor();">
+		props.title</h1>;
+
+view props =
+	h1 [ class "title",
+		 onClick ChangeColor ]
+		[ text props.title ]
+
+
+elm = high-level language
+	  more DSL than general purpose PL
+
+javascript = lower-level
+
+(3)  But I could add a global eventQueue:
+
+const view = props =>
+	<h1 className="title"
+		onClick="eventQueue.add('ChangeColor')">
+		props.title</h1>;
+
+POINT: ELM takes REACT and a few other react libraries
+    and takes an opinion that you must do it this way.
+
+<<<where to go from here>>>
+
+todo ^^ table of features (one queue *callback* vs multiple *callbacks*; one immutable tree vs multiple; ...)

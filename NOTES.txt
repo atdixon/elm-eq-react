@@ -1,0 +1,190 @@
+todo see this on keys -- https://discourse.elm-lang.org/t/html-keyed-and-unique-ids-for-data/1149
+    todo -- https://guide.elm-lang.org/optimization/keyed.html
+todo see https://redux.js.org/introduction/prior-art
+    ...(has note on gradual typing)
+todo https://guide.elm-lang.org/optimization/lazy.html
+    ^^^ some of this stuff , point to another potential talk ...
+
+* show entry point / render for both apps
+
+* editor font size ++
+
+* keep pointing out immutability as we go...
+    ...and how we are of course leveraging es6
+        syntax to write elm-like... but that's okay...
+
+* describe constructor / constructor
+    state / elm-Model
+    "given some props this is our initial model"
+    * elm keeps reference to global "state"
+    * here, we keep it and manage it but we will follow
+        the same rules (immutability etc) that elm does
+        to make our case...
+
+Prelim
+---
+This is my tour through the woods w/ some opinions but mainly I want to
+    do two things: show you things that you may have not know already
+        (both technical and thinking TOOLS) .
+BUT you have to be able to explore and EXECUTE....
+
+
+Narrative
+---
+SIMPLE/HELLO VIEW
+PURE COMPONENT
+STATE INTRO
+EXPAND (no state, using global)
+AN EVENT (update...threaded vs system)
+ASYNC CALL???
+FINALLY: "expand w/ state..." ... "components"
+KEYBOARD EVENT (purity)
+
+
+todo TYPES / PROP TYPES
+
+
+** how compare to pine?
+
+** note at end that you hid types etc in Scaff
+
+** perhaps walk entirely through building it via React
+    THEN SHOW ELM VERSION
+
+* note: all asynchroncity is done by Controller
+
+* try reg'lar ol basic react impl
+
+* get diagrams together!
+
+* an interesting point: some things that are more straightforward
+    and much easier BUT we make the choice of tyranny
+    to keep us honest
+
+* the criticism that React is Object-Oriented is both
+    empty on the one hand (in the sense that you can avoid OO
+        altogether) but also philistinic (in the sense that
+            some notion of object is *essential* if you can
+                see that "state" is valuable in some cases)
+
+* in App__.elm point out separation of internal model and "props" (in view eg)
+
+PRES
+---
+* SHOW hand-aligned DIFF (pre-prepared!)...
+    "they are almost identical...no surprise the programming
+        models are pretty much identical (iff you follow
+            the elm architecture in React!) ..."
+
+    ==> where are we going w/ this?
+
+"note introduction of state -- we are still in the realm of
+    immutability; it is simply that we have introduced another tree/root"
+    (this is not entirely semantics b/c its a mental model that
+        completely aids in design, implementation and debugging etc")
+    ** https://package.elm-lang.org/
+        search "components" .. okay but we can be very concrete here
+            look at this state example and ask which is simpler?
+        after you answer that question then go look at DOM
+            and where Elm relies on the DOM... so even Elm has wandered
+                from its commitment to purity...
+
+Components:
+    ** "App__.jsx is the SAME LOC as App_.jsx"!!!!!!!!! AND IT HAS ENCAPSULATION!!!
+        (we have to maintain the individual component "state" --> the state is always there
+            and its **directly** connected TO THE COMPONENT...there is no escaping this...
+                no matter how many ad hominem attacks are leveled at so-called "objects")
+    --> BUT IS THIS SOME KIND OF DEATH KNELL FOR ELM? NO? B/C ELM ALLOWS FOR LOCAL STATE
+        PER SE... YOU JUST HAVE TO NEGOTIATE AND THREAD IT FROM PARENT... BUT IT CAN BE OPAQUE!
+            (SO: INTRODUCE OPAQUE TYPES)
+            **HOWEVER** SEE THE MASSIVE BOILERPLATE (model tagging, ...etc, Html.map, ...)
+                REQUIRED TO NEGOTIATE THE ENCAPSULATION IN ELM...
+
+    --> In App__.elm conclude that we would probably stay with the simple Bool interface
+        ie, NOT introduce state. But look at the consequence of this when we would need
+            more state.. eg. instead of expanded perhaps if the note is long we'd want some kind of
+                EG EG==>> scroll state, dirty state
+                 (point being there are reasonable notions of state: ie ephemeral UX
+                    stuff...)
+
+            So, really, this concept of "expanded" is reasonably a private/state concern
+                but we are forced to contend w/ it
+                there's a name for this: it's called coupling
+
+            Now: depending on your business domain this matters more or less.
+                Some domains don't call for significant moments of state and so having
+                this coupling is an inconvenience but minor.
+                But in more productivity apps you find this kind of stuff
+                and increasing inconvenience...
+                HOW MUCH IS HARD TO SAY. TRADEOFFS ARE THE GAME... so...
+
+    --> KEY POINT: look at explosion of loc and boilerplate
+        NOW we **could** model things back to where we started, great.
+        You want your design choices to be governed by things like encapsulation, cohesion,
+            code malleability -- productive modeling -- NOT by the programming language that
+            you are dealing with. This is just a point about decision making and not a criticism
+            of elm. It's just that if you get to a point where you are saying things like hey
+            you can model this to make it easier to write in Elm vs JS.
+            These languages are all the same. They still show up in runtime using
+                von neumann models... so far there's no programming language that changes that game.
+                    So whether its react or elm or visual basic transpiling to js, the tools to make
+                    simple software transcend the technical bits.
+
+    --> OKAY SO THAT BRINGS US TO .. if elm is react is whatever what are we getting:
+        * enforced immutability -> huge win
+        * "elm architecture" -> huge win (you are just an update function working a queue... that is
+            way way simpler -- once you learn it -- than looking at a system where here
+            you're dealing w/ callbacks, each of which are their own queues and you ultimately don't
+                know who
+        -- so far we can get these: w/ react & immutablilty.js (ahem, pine)
+        * what about typing...
+        * strong typing (proof against certain things)
+        -- elm (non-composable)... pure script (composable), flow(?)..
+            =>
+           HAVE TO BE VERY CAREFUL HERE NOT TO SEE ELM AS A PANACEA
+            => concrete demo: event handling....
+
+Keyboard event:
+    * elm could (try to) offer full coverage but it doesn't for obvious reasons (practicality)
+    * elm semantics are clear: decoder fails is silent no-op ...
+    ^^ *** REPHRASE THIS AS DEFENSIVE CODING MOVE
+        -- it did seem to me that elm was favoring purity and this is hurting
+        but elm just asks you to lose the Debug.log when you go to prod
+            ...BUT THAT'S A BIT
+
+
+CONCLUSION:
+    - MVC frameworks are fundamentally the SAME
+        (from the view of how we approach building/fixing/enhancing)
+            (ie, runtime mechanics -> static files -> runtime mech)
+        - HOPING to see this isn't a cute exaggeration
+            but a powerful isomorphism... that will help us
+                be productive across all MVC frameworks...
+
+    - or, NARROWER---> POINT ABOUT COMPONENTS!!!
+
+"there is a trend/goal toward declarative systems ..
+    but we still can't escape dynamics/mechanics
+        b/c we are translating from real world objectives
+            which are always dynamic to declarative solution
+                that we predict will then yield the dynamics we desire"
+
+
+
+* commit history-less to github
+
+
+todo CONSIDER dom-owned state:
+    ... focus / document.activeElement
+    ... un/controlled components in react??? https://reactjs.org/docs/uncontrolled-components.html
+    todo EXPLORE THIS: https://reactjs.org/docs/refs-and-the-dom.html
+
+
+
+Elm =
+    React
+    Flow, TypeScript, PureScript
+    Redux
+
+
+todo even in React there is a single QUEUE (b/c browser javascript is single-threaded)

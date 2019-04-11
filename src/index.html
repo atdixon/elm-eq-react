@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<style>
+    body { margin: 0; padding: 0; }
+    .banner { text-align: center; padding: 15px; }
+    .pane { display: flex; width: 100%; }
+    .col { flex: 1; border: 1px solid #ddd; margin: 0 10px;
+        padding: 25px; position: relative; text-align: center; }
+    .tag { position: absolute; top: 0; left: 0; padding: 3px;
+        font-weight: bold; background-color: #555; color: white;
+        font-size: large; }
+    .item { border: 1px solid #eee; padding: 3px; margin: 2px;
+        cursor: default; user-select: none; }
+    .item:hover { background-color: #eee; }
+    button { font-size: large; margin-bottom: 15px; }
+</style>
+<div class="pane">
+    <div class="col">
+        <div class="tag">react</div>
+        <div id="app-react"></div>
+    </div>
+    <div class="col">
+        <div class="tag">elm</div>
+        <div id="app-elm"></div>
+    </div>
+</div>
