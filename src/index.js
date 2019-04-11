@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import data from './data.json'
-import AppReact from './minimal-diff/App.jsx'
-import AppElm from './minimal-diff/App.elm'
+import AppReact from './componentized/App.jsx'
+import AppElm from './componentized/App.elm'
 
 ReactDOM.render(
     <AppReact items={data.items}/>, document.getElementById('app-react'));
