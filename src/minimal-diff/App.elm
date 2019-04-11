@@ -13,7 +13,7 @@ heading =
     h4 [] [ text "Grocery List" ]
 
 
-item item_ expanded =
+groceryItem item_ expanded =
     div [ class "item", onClick <| Toggle item_ ]
         [ text item_.item
         , br [] []
@@ -31,7 +31,7 @@ view { items, expanded } =
         heading
             :: button [ onClick Reload ] [ text "reload" ]
             :: List.map
-                (\t -> item t <| Set.member t.item expanded)
+                (\t -> groceryItem t <| Set.member t.item expanded)
                 items
 
 
