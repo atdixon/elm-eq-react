@@ -22,14 +22,12 @@ code changes. (The React and Elm versions of the App are styled to be
 `src/index.js` imports a specific example. You'll need to edit this file to 
 import the different examples, then re-run `yarn start`.
 
-* `src/minimal-diff/App.elm`
+* `src/minimal-diff/App.{jsx|elm}`
     - Implements the app keeping a minimal diff between the two implementations.
-* `src/idiomatic/App.elm` 
+* `src/idiomatic/App.{jsx|elm}` 
     - Implements the app adhering to idioms of each language/framework.
-* `src/componentized/App.elm`
-    - What a component looks like in each framework. 
-* `src/with-keyboard/App.elm`
-    - Supports a basic keyboard (shift-click) use case. The interesting point here
-    is elm's decision not to emit errors when it very well could, whereas
-    React will throw an exception when referencing an invalid value from an
-    html Event. 
+* `src/componentized/App.{jsx|elm}`
+    - What a component with private information looks like in each framework.
+* `src/with-keyboard/App.{jsx|elm}`
+    - Supports a basic keyboard command (shift-click) use case. The interesting point here is how
+    React handles referencing an invalid value from an Event vs. Elm's choice.
