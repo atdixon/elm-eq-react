@@ -14,7 +14,8 @@ The app is contrived to be as simple as possible while exercising a few
     $ yarn start
     
 This starts a webpack-dev-server that will hot-reload React and Elm 
-code changes.
+code changes. (The React and Elm versions of the App are styled to be
+ side-by-side.)
 
 #### Notes
 
